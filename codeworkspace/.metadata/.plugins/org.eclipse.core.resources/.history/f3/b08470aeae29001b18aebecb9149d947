@@ -1,0 +1,2 @@
+limit-service.minimum = 7
+limit-service.maximum = 777

@@ -1,0 +1,3 @@
+1603546798846	Extract local variable 'forEntity'
+1603546919452	Extract local variable 'body'
+1603549696241	Rename type 'CurrencyConversionCalculator'

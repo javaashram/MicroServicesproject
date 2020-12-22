@@ -1,0 +1,37 @@
+package com.sks.currency.exchange.currencyexchange.controller;
+
+import java.math.BigDecimal;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sks.currency.exchange.currencyexchange.entity.CurrencyExchangeRate;
+import com.sks.currency.exchange.currencyexchange.repo.ExchangeRepository;
+
+@RestController
+public class Currencyexchangecontroller {
+
+	@Autowired
+	Environment environment;
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	ExchangeRepository exchangeRepository;
+	
+	@GetMapping("/currency-service/from/{from}/to/{to}")
+	public CurrencyExchangeRate getCurrencyExcgangeRate(@PathVariable String from, @PathVariable String to) {
+		
+		CurrencyExchangeRate currencyExchangeRate = exchangeRepository.findByFromAndTo(from, to);
+		currencyExchangeRate.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
+		
+		logger.info("CurrencyExchangeRate is : {}", currencyExchangeRate);
+		return currencyExchangeRate;
+		
+	}
+}

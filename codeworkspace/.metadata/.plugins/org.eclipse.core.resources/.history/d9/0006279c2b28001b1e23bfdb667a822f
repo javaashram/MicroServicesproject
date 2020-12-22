@@ -1,0 +1,5 @@
+limit-service.minimum = 1
+limit-service.maximum = 111
+
+management.security.enabled=false 
+management.endpoints.web.exposure.include: health,info,refresh
